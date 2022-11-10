@@ -1,0 +1,1 @@
+export { restaurantReducer, initRestaurant } from "./restaurantReducer"
