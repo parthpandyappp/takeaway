@@ -9,7 +9,7 @@ const MapCard = ({ restaurant }) => {
     <Fragment>
       <div style={{ border: "1px solid black", padding: "1rem" }}>
         {restaurant.name}
-        <button>Remove</button>
+        <button onClick={()=>dispatch({type:"REMOVE_RESTAURANT", payload:restaurant.name})}>Remove</button>
         {isBookmarked(state.bookmarks, restaurant) ? (
           <button
             onClick={() =>

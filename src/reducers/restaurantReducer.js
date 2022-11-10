@@ -10,6 +10,10 @@ const restaurantReducer = (state, action) => {
                     { name: action.payload, created: new Date() },
                 ],
             };
+        case "REMOVE_RESTAURANT":
+            return {
+                ...state, restaurants: state.restaurants.filter(restaurant => restaurant.name !== action.payload)
+            };
         case "ADD_BOOKMARK":
             return {
                 ...state, bookmarks: [
