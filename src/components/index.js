@@ -1,3 +1,4 @@
 export { Search } from "./Search";
-export { BookMarks } from "./Bookmarks";
 export { MapCard } from "./MapCard"
+export { BookMarks } from "./Bookmarks";
+export { MapContainer } from "./MapContainer"

@@ -16,5 +16,4 @@ const RestaurantManager = ({ children }) => {
 }
 
 const useRestaurantManager = () => useContext(restaurantContext);
-
 export { useRestaurantManager, RestaurantManager };

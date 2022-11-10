@@ -1,4 +1,4 @@
-import { MapCard, Search } from "../components";
+import { MapContainer, Search } from "../components";
 
 const Home = () => {
   return (
@@ -6,7 +6,7 @@ const Home = () => {
       <h1>Home</h1>
       <h3>Searchbar</h3>
       <Search />
-      <MapCard />
+      <MapContainer />
     </div>
   );
 };

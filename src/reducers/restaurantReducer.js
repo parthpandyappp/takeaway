@@ -10,6 +10,16 @@ const restaurantReducer = (state, action) => {
                     { name: action.payload, created: new Date() },
                 ],
             };
+        case "ADD_BOOKMARK":
+            return {
+                ...state, bookmarks: [
+                    ...state.bookmarks, action.payload
+                ]
+            };
+        case "REMOVE_FROM_BOOKMARKS":
+            return {
+                ...state, bookmarks: state.bookmarks.filter(bookmark => bookmark.name !== action.payload)
+            }
         default:
             return state;
     }
