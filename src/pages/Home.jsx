@@ -2,9 +2,7 @@ import { MapContainer, Search } from "../components";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Home</h1>
-      <h3>Searchbar</h3>
+    <div className="flex flex-col justify-center">
       <Search />
       <MapContainer />
     </div>

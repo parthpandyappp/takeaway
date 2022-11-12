@@ -40,33 +40,45 @@ const Search = () => {
 
   return (
     <Fragment>
-      <div className="flex gap-2">
-        <input
-          className="rounded"
-          type="search"
-          name="search-restaurant"
-          onChange={(e) => handleChange(e)}
-          value={state.restaurant_name}
-          autocomplete="off"
-        />
+      <div className="flex gap-2 justify-center items-center mt-7">
+        <div className="flex flex-col gap-3">
+          <input
+            className=" px-3 py-1.5 border-2 border-solid border-para rounded text-base font-normal text-gray-700 focus:outline-none  w-64"
+            type="search"
+            name="search-restaurant"
+            onChange={(e) => handleChange(e)}
+            value={state.restaurant_name}
+            autocomplete="off"
+          />
+          {suggestions &&
+            suggestions.map((suggestion) => (
+              <p
+                className="shadow px-1 py-1 text-left w-64 text-sm text-headline cursor-pointer"
+                onClick={() =>
+                  dispatch({ type: "SET_NAME", payload: suggestion })
+                }
+              >
+                {suggestion}
+              </p>
+            ))}
+        </div>
+
         <button
-          className="bg-button text-buttontxt px-4 py-1 rounded"
-          onClick={() =>
-            dispatch({ type: "ADD_RESTAURANT", payload: state.restaurant_name })
-          }
+          className="bg-button text-buttontxt px-4 py-1.5 rounded self-baseline"
+          onClick={() => {
+            dispatch({
+              type: "ADD_RESTAURANT",
+              payload: state.restaurant_name,
+            });
+            dispatch({ type: "SET_NAME", payload: "" });
+            setSuggestions([]);
+          }}
         >
           Add
         </button>
       </div>
 
-      {suggestions &&
-        suggestions.map((suggestion) => (
-          <p
-            onClick={() => dispatch({ type: "SET_NAME", payload: suggestion })}
-          >
-            {suggestion}
-          </p>
-        ))}
+      <div className="flex gap-2 justify-center mt-2"></div>
     </Fragment>
   );
 };
