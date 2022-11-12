@@ -1,6 +1,6 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
 import { useRestaurantManager } from "../context";
+import { useState, useEffect, Fragment } from "react";
 
 const Search = () => {
   const { state, dispatch } = useRestaurantManager();
@@ -39,14 +39,26 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <input
-        type="search"
-        name="search-restaurant"
-        onChange={(e) => handleChange(e)}
-        value={state.restaurant_name}
-        autocomplete="off"
-      />
+    <Fragment>
+      <div className="flex gap-2">
+        <input
+          className="rounded"
+          type="search"
+          name="search-restaurant"
+          onChange={(e) => handleChange(e)}
+          value={state.restaurant_name}
+          autocomplete="off"
+        />
+        <button
+          className="bg-button text-buttontxt px-4 py-1 rounded"
+          onClick={() =>
+            dispatch({ type: "ADD_RESTAURANT", payload: state.restaurant_name })
+          }
+        >
+          Add
+        </button>
+      </div>
+
       {suggestions &&
         suggestions.map((suggestion) => (
           <p
@@ -55,14 +67,7 @@ const Search = () => {
             {suggestion}
           </p>
         ))}
-      <button
-        onClick={() =>
-          dispatch({ type: "ADD_RESTAURANT", payload: state.restaurant_name })
-        }
-      >
-        Add
-      </button>
-    </div>
+    </Fragment>
   );
 };
 
