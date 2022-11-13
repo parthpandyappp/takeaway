@@ -72,6 +72,7 @@ const MapCard = ({ restaurant }) => {
               </div>
             </div>
             <iframe
+              className="w-full h-48"
               title="map"
               src={`https://datastudio.google.com/embed/reporting/430242fa-4162-4950-a984-824b3b355b3c/page/dQMwC?params=%7B"ds2.name2":"${restaurant.name}"%7D`}
             ></iframe>
