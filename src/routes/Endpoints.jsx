@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { Home, Signin } from "../pages";
+import { Home, Signin, Bookmarks, Likes } from "../pages";
 
 const Endpoints = () => {
   return (
@@ -7,6 +7,8 @@ const Endpoints = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/login" element={<Signin />} />
+        <Route path="/likes" element={<Likes />} />
+        <Route path="/bookmarks" element={<Bookmarks />} />
       </Routes>
     </>
   );

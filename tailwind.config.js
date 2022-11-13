@@ -13,6 +13,7 @@ module.exports = {
       'headline': '#334155',
       'buttontxt': '#232946',
       'para': '#b8c1ec',
+      'red': '#ef4444'
     },
   },
   plugins: [],
