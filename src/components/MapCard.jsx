@@ -1,6 +1,14 @@
 import { Fragment } from "react";
 import { useRestaurantManager } from "../context";
-import { isBookmarked, isLiked } from "../helper-functions";
+import {
+  isBookmarked,
+  isLiked,
+  notifyRemoved,
+  notifyAddedToBookmarks,
+  notifyRemovedFromBookmarks,
+  notifyAddedToLikes,
+  notifyRemovedFromLikes,
+} from "../helper-functions";
 import {
   BsBookmark,
   BsHeart,
@@ -26,48 +34,53 @@ const MapCard = ({ restaurant }) => {
                 {isBookmarked(state.bookmarks, restaurant) ? (
                   <BsFillBookmarkFill
                     className="text-xl text-button cursor-pointer"
-                    onClick={() =>
+                    onClick={() => {
                       dispatch({
                         type: "REMOVE_FROM_BOOKMARKS",
                         payload: restaurant.name,
-                      })
-                    }
+                      });
+                      notifyRemovedFromBookmarks(restaurant.name);
+                    }}
                   />
                 ) : (
                   <BsBookmark
                     className="text-xl text-button cursor-pointer"
-                    onClick={() =>
-                      dispatch({ type: "ADD_BOOKMARK", payload: restaurant })
-                    }
+                    onClick={() => {
+                      dispatch({ type: "ADD_BOOKMARK", payload: restaurant });
+                      notifyAddedToBookmarks(restaurant.name);
+                    }}
                   />
                 )}
 
                 {isLiked(state.likes, restaurant) ? (
                   <BsFillHeartFill
                     className="text-xl text-button cursor-pointer"
-                    onClick={() =>
+                    onClick={() => {
                       dispatch({
                         type: "REMOVE_FROM_LIKES",
                         payload: restaurant.name,
-                      })
-                    }
+                      });
+                      notifyRemovedFromLikes(restaurant.name);
+                    }}
                   />
                 ) : (
                   <BsHeart
                     className="text-xl text-button cursor-pointer"
-                    onClick={() =>
-                      dispatch({ type: "ADD_TO_LIKES", payload: restaurant })
-                    }
+                    onClick={() => {
+                      dispatch({ type: "ADD_TO_LIKES", payload: restaurant });
+                      notifyAddedToLikes(restaurant.name);
+                    }}
                   />
                 )}
                 <RiDeleteBin7Line
                   className="text-xl text-red cursor-pointer"
-                  onClick={() =>
+                  onClick={() => {
                     dispatch({
                       type: "REMOVE_RESTAURANT",
                       payload: restaurant.name,
-                    })
-                  }
+                    });
+                    notifyRemoved(restaurant.name);
+                  }}
                 />
               </div>
             </div>

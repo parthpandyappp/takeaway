@@ -1,11 +1,15 @@
 import axios from "axios";
-import { useRestaurantManager } from "../context";
+import { useExistingUsers, useRestaurantManager } from "../context";
 import { useState, useEffect, Fragment } from "react";
+import { notifyAdded, notifyToLogin, notifyError } from "../helper-functions";
+import { useNavigate } from "react-router-dom";
 
 const Search = () => {
   const { state, dispatch } = useRestaurantManager();
+  const { isLoggedIn } = useExistingUsers();
   const [restaurants, setRestaurants] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     (async () => {
@@ -63,19 +67,36 @@ const Search = () => {
             ))}
         </div>
 
-        <button
-          className="bg-button text-buttontxt px-4 py-1.5 rounded self-baseline"
-          onClick={() => {
-            dispatch({
-              type: "ADD_RESTAURANT",
-              payload: state.restaurant_name,
-            });
-            dispatch({ type: "SET_NAME", payload: "" });
-            setSuggestions([]);
-          }}
-        >
-          Add
-        </button>
+        {isLoggedIn ? (
+          <button
+            className="bg-button text-buttontxt px-4 py-1.5 rounded self-baseline"
+            onClick={() => {
+              if (state.restaurant_name.length > 0) {
+                dispatch({
+                  type: "ADD_RESTAURANT",
+                  payload: state.restaurant_name,
+                });
+                dispatch({ type: "SET_NAME", payload: "" });
+                setSuggestions([]);
+                notifyAdded(state.restaurant_name);
+              } else {
+                notifyError("Give a valid value for the map to be added");
+              }
+            }}
+          >
+            Add
+          </button>
+        ) : (
+          <button
+            className="bg-button text-buttontxt px-4 py-1.5 rounded self-baseline"
+            onClick={() => {
+              notifyToLogin();
+              navigate("/login");
+            }}
+          >
+            Add
+          </button>
+        )}
       </div>
 
       <div className="flex gap-2 justify-center mt-2"></div>

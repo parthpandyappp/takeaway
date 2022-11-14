@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useExistingUsers } from "../context";
 import { useNavigate } from "react-router-dom";
+import { notifyLoggedIn } from "../helper-functions";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
@@ -32,7 +33,10 @@ const Signin = () => {
     e.preventDefault();
     const error = {};
     if (validateUser(username, password)) {
+      localStorage.setItem("user", username);
+      localStorage.setItem("isLoggedIn", true);
       setLogin(true);
+      notifyLoggedIn(username);
       navigate("/");
     } else {
       error.exception = "User doesn't exist";

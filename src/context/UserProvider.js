@@ -6,7 +6,7 @@ const userContext = createContext(null);
 const UserProvider = ({ children }) => {
 
     const [users, setUsers] = useState([])
-    const [isLoggedIn, setLogin] = useState(false)
+    const [isLoggedIn, setLogin] = useState(JSON.parse(localStorage.getItem("isLoggedIn")) ?? false)
 
     useEffect(() => {
         (async () => {
