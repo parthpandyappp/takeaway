@@ -6,6 +6,8 @@ const userContext = createContext(null);
 const UserProvider = ({ children }) => {
 
     const [users, setUsers] = useState([])
+    const [isLoggedIn, setLogin] = useState(JSON.parse(localStorage.getItem("isLoggedIn")) ?? false)
+
     useEffect(() => {
         (async () => {
             try {
@@ -25,7 +27,7 @@ const UserProvider = ({ children }) => {
     }, []);
 
     return (
-        <userContext.Provider value={{ users }}>
+        <userContext.Provider value={{ users, setLogin, isLoggedIn }}>
             {children}
         </userContext.Provider>
     )
