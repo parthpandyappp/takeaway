@@ -12,7 +12,7 @@ const Nav = () => {
     localStorage.setItem("isLoggedIn", false);
   };
   return (
-    <nav className="relative flex items-center bg-background justify-between p-4 mb-2">
+    <nav className="relative flex-none flex items-center bg-background justify-between p-4 mb-2">
       <h1 className="flex items-center gap-1 text-xl cursor-pointer text-headline font-bold">
         <MdFastfood />
         <Link to="/">TakeAway</Link>

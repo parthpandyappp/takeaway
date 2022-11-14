@@ -4,7 +4,7 @@ import { Nav } from "./components";
 import "./index.css";
 function App() {
   return (
-    <div className="bg-background min-h-screen">
+    <div className="flex flex-col bg-background min-h-screen">
       <Nav />
       <Routes />
     </div>
