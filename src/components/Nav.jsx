@@ -2,12 +2,14 @@ import { BsBookmark } from "react-icons/bs";
 import { MdFastfood } from "react-icons/md";
 import { AiOutlineHeart } from "react-icons/ai";
 import { Link } from "react-router-dom";
-import { useExistingUsers } from "../context";
+import { useExistingUsers, useRestaurantManager } from "../context";
 
 const Nav = () => {
   const { isLoggedIn, setLogin } = useExistingUsers();
+  const { dispatch } = useRestaurantManager();
   const handleLogout = () => {
     setLogin(false);
+    dispatch({ type: "BACK_TO_DEFAULT" });
     localStorage.setItem("user", null);
     localStorage.setItem("isLoggedIn", false);
   };

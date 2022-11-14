@@ -6,6 +6,7 @@ const restaurantContext = createContext(null);
 const RestaurantManager = ({ children }) => {
 
     const [state, dispatch] = useReducer(restaurantReducer, initRestaurant)
+    console.log(state)
 
 
     return (

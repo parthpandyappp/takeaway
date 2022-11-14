@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useExistingUsers } from "../context";
 import { useNavigate } from "react-router-dom";
-import { notifyLoggedIn } from "../helper-functions";
+import { notifyError, notifyLoggedIn } from "../helper-functions";
 
 const Signin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [err, setErr] = useState({});
 
   const navigate = useNavigate();
 
@@ -17,21 +16,17 @@ const Signin = () => {
     users.forEach((user) => {
       if (user.fields.username === usrnm) {
         if (user.fields.password === pass) {
-          console.log("True");
           valid = true;
         } else {
           valid = false;
-          err.password = "incorrect password";
         }
       }
     });
-    console.log("False");
     return valid;
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const error = {};
     if (validateUser(username, password)) {
       localStorage.setItem("user", username);
       localStorage.setItem("isLoggedIn", true);
@@ -39,10 +34,8 @@ const Signin = () => {
       notifyLoggedIn(username);
       navigate("/");
     } else {
-      error.exception = "User doesn't exist";
+      notifyError("incorrect username or password, please try again");
     }
-
-    setErr(error);
   };
 
   return (
@@ -61,6 +54,7 @@ const Signin = () => {
             type="text"
             className="border-2 border-slate-600 rounded-md py-1 w-full px-2 bg-amber-50"
             onChange={(e) => setUsername(e.target.value)}
+            autoComplete="off"
           />
         </div>
         <div className="flex flex-col mt-5">
