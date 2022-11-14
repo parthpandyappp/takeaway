@@ -16,7 +16,7 @@ const restaurantReducer = (state, action) => {
             };
         case "ADD_BOOKMARK":
             return {
-                ...state, bookmarks: [
+                ...state, restaurants: state.restaurants.filter(restaurant => restaurant.name !== action.payload.name), bookmarks: [
                     ...state.bookmarks, action.payload
                 ]
             };
